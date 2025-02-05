@@ -74,9 +74,18 @@ function parseExpression(expression) {
             stack.push(parseFloat(token));
         } 
         else { // если токен оператор, то добавляем его в стек операторов
+            // чтобы соблюсти порядок действий делаем проверку на приоритет операторов.
+            // если приоритет последнего оператора в стеке больше или равен приоритету текущего оператора, то вычисляем последнее действие
+            while (operators.length && PRIORITY[operators.slice(-1)] >= PRIORITY[token]) {
+                calculateOperation();
+            }
+            // добавляем текущий оператор в стек операторов
             operators.push(token);
         }
     });
+    // вычисляем оставшиеся действия
+    while (operators.length) calculateOperation();
+    return stack[0];
 }
 
 // функция для вычисления действия оператора и операндов
