@@ -1,0 +1,74 @@
+/* уберем стандартные стили с Html страницы */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Добавим позиционирование нашего контейнера 
+по центру с помощью flex, place-content: center
+Так же добавим высоту нашему контейнеру 100dvh = 100% 
+от динамической высоты экрана, отступы в 32px по всем сторонам*/
+body {
+    display: flex;
+    place-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    height: 100dvh;
+    padding: 32px;
+    background-color: #f4f4f4;
+    font-size: 16px;
+}
+
+/* ------------------- Стили для калькулятора ----------------------- */
+/* Ограничим ширину в 350px и высоту по внутреннему содержимому, 
+добавим flex с вертикальным направлением и отступ, чтобы наш инпут
+ не был вплотную к кнопкам */
+.calculator {
+    max-width: 300px;
+    height: fit-content;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+/* Стили для инпута, чтобы был во всю ширину, 
+правильно позиционировал числа и был фиксированной высоты */
+.display {
+    width: 100%;
+    height: 50px;
+    text-align: right;
+    font-size: 1.5em;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+/* Стили для контейнера кнопок, воспользуемся свойством display: grid,
+ для создания таблицы из элементов с шаблоном колонок "повторить 4 раза, 
+ с шириной по доступному содержимому. То есть 100% \ 4 = 25% 25% 25% 25% */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+/* Сделаем стили для наших кнопок */
+button {
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    /* чтобы не делать дополнительные объекты стилей и улучшения семантики стилей, 
+    воспользуемся оператором & чтобы добавлять внутрь класса дополнительные свойства */
+    &:active {
+        opacity: 0.7;
+    }
+    &:hover {
+        background-color: orange;
+    }
+}
