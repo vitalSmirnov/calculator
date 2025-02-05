@@ -30,4 +30,20 @@ function calculate() {
     let expression = $('#display').val();
     // Вывод в консоль
     console.log(expression)
+    // Передаем строку в функцию для обработки
+    try {
+        parseExpression(expression);
+    } catch (error) {
+        $('#display').val(error);
+        return;
+    }
+}
+
+
+function parseExpression(expression) {
+    // разбиваем строку на токены, используя регулярное выражение, которое собирает все числа и операторы в массив. Пример : '5 + 5' => ['5', '+', '5']
+    let tokens = expression.match(/(-?\d+\.?\d*)|([\+\-\*\/])/g);
+    // если токенов нет, то выражение некорректное
+    if (!tokens) throw ERRORS['INVALID_EXPRESSION'];
+    else console.log(tokens);
 }
