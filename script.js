@@ -58,5 +58,14 @@ function parseExpression(expression) {
     let tokens = expression.match(/(-?\d+\.?\d*)|([\+\-\*\/])/g);
     // если токенов нет, то выражение некорректное
     if (!tokens) throw ERRORS['INVALID_EXPRESSION'];
-    else console.log(tokens);
+
+
+    tokens.forEach(token => {
+        if (/\d/.test(token)) { // если токен число, то добавляем его в стек чисел
+            stack.push(parseFloat(token));
+        } 
+        else { // если токен оператор, то добавляем его в стек операторов
+            operators.push(token);
+        }
+    });
 }
