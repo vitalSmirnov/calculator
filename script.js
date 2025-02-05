@@ -7,13 +7,18 @@ const PRIORITY = {
     ['-']: 1
 }
 
+// добавим функцию для проверки является ли символ оператором
+function isSign (char) {
+    return char === '+' || char === '-' || char === '*' || char === '/';
+}
+
 // добавим функцию для обработки нажатия на кнопоки, которые мы сделали на странице
 function appendValue(value) {
     const display = $('#display').val();
     const lastChar = display.slice(-1);
 
     // Строка не может начинаться с знака умножения, деления, плюса или нескольких нулей
-    if ((display == '0' || display == ERRORS['DIVISION_BY_ZERO'] || display == ERRORS['INVALID_EXPRESSION']) && value != '.' && value != '+' && value != '*' && value != '/' && value != '0') {
+    if ((display == '0' || display == 'Деление на ноль' || display == 'Некорректное выражение') && value != '.' && value != '+' && value != '*' && value != '/' && value != '0') {
         $('#display').val(value);
     }
     else {

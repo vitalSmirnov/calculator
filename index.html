@@ -11,26 +11,26 @@
     <div class="calculator">
         <input type="text" class="display" id="display" value="0" readonly>
         <div class="buttons">
-            <button id="clear">C</button>
-            <button id="divide">/</button>
-            <button id="times">*</button>
-            <button id="minus">-</button>
+           <button id="clear" onclick="clearDisplay()">C</button>
+            <button id="divide" onclick="appendValue('/')">/</button>
+            <button id="times" onclick="appendValue('*')">*</button>
+            <button id="minus" onclick="appendValue('-')">-</button>
             
-            <button id="7">7</button>
-            <button id="8">8</button>
-            <button id="9">9</button>
-            <button id="plus">+</button>
+            <button id="7" onclick="appendValue('7')">7</button>
+            <button id="8" onclick="appendValue('8')">8</button>
+            <button id="9" onclick="appendValue('9')">9</button>
+            <button id="plus" onclick="appendValue('+')">+</button>
             
-            <button id="4">4</button>
-            <button id="5">5</button>
-            <button id="6">6</button>
-            <button id="Enter">=</button>
+            <button id="4" onclick="appendValue('4')">4</button>
+            <button id="5" onclick="appendValue('5')">5</button>
+            <button id="6" onclick="appendValue('6')">6</button>
+            <button onclick="calculate()" id="Enter">=</button>
             
-            <button id="1">1</button>
-            <button id="2">2</button>
-            <button id="3">3</button>
-            <button id="0">0</button>
-            <button id="dot">.</button>
+            <button id="1" onclick="appendValue('1')">1</button>
+            <button id="2" onclick="appendValue('2')">2</button>
+            <button id="3" onclick="appendValue('3')">3</button>
+            <button id="0" onclick="appendValue('0')">0</button>
+            <button id="dot" onclick="appendValue('.')">.</button>
         </div>
     </div>
 </body>
