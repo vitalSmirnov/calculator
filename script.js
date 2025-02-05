@@ -57,7 +57,7 @@ function parseExpression(expression) {
     // разбиваем строку на токены, используя регулярное выражение, которое собирает все числа и операторы в массив. Пример : '5 + 5' => ['5', '+', '5']
     let tokens = expression.match(/(-?\d+\.?\d*)|([\+\-\*\/])/g);
     // если токенов нет, то выражение некорректное
-    if (!tokens) throw ERRORS['INVALID_EXPRESSION'];
+    if (!tokens) throw 'Некорректное выражение';
 
 
     tokens.forEach(token => {
@@ -68,4 +68,19 @@ function parseExpression(expression) {
             operators.push(token);
         }
     });
+}
+
+// функция для вычисления действия оператора и операндов
+function calc(left, right, op) {
+    switch(op) {
+        case '+':
+            return left + right;
+        case '-':
+            return left - right;
+        case '*':
+            return left * right;
+        case '/':
+            if (right === 0) throw 'Деление на ноль';
+            return left / right;
+    }
 }
