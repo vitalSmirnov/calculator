@@ -13,6 +13,34 @@ const PRIORITY = {
     ['-']: 1
 }
 
+// добавим функцию для удаления последнего символа, для использования с клавиатуры
+function backspace() {
+    let current = $('#display').val();
+    if (current.length > 1) { // если длина строки больше 1, то удаляем последний символ
+        $('#display').val(current.slice(0, -1));
+    }
+    else { // иначе устанавливаем значение 0, чтобы не допускать пустого поля
+        $('#display').val('0')
+    }
+}
+
+$(document).ready(function() {
+    $(document).on('keydown', function(event) {
+        // во избежания непроизвольного выполнения действий по умолчанию, заблокируем их
+        event.preventDefault();
+        // Воспользуемся свойством key объекта event, чтобы определить, какая клавиша была нажата
+        let key = event.key;
+        // с помощью регулярного выражения проверим является ли нажатая клавиша цифрой или знаком
+        if (/(^\d)|(^[\+\-\*\/\.])/.test(key)) {
+            appendValue(key);
+        } else if (key === 'Enter') {
+            calculate();
+        } else if (key === 'Backspace' || key === 'c' || key === 'C') {
+            backspace();
+        }
+    });
+});
+
 // добавим функцию для проверки является ли символ оператором
 function isSign (char) {
     return char === '+' || char === '-' || char === '*' || char === '/';
