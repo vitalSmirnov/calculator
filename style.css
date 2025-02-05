@@ -72,3 +72,13 @@ button {
         background-color: orange;
     }
 }
+/* Не все кнопки будут одинаковы, например кнопка =, создадим для неё стили */
+#Enter {
+    grid-row: span 2;
+    background-color: #ffa500;
+    color: white;
+
+    &:hover {
+        background-color: #fdb633
+    }
+}
