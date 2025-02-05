@@ -82,3 +82,8 @@ button {
         background-color: #fdb633
     }
 }
+
+.active {
+    background-color: #ffa500;
+    color: white;
+}
