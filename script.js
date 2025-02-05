@@ -35,14 +35,17 @@ function clearDisplay() {
 }
 
 function calculate() {
-    // Получение выражения из дисплея
-    let expression = $('#display').val();
-    // Вывод в консоль
-    console.log(expression)
-    // Передаем строку в функцию для обработки
     try {
-        parseExpression(expression);
+        // Получение выражения из дисплея
+        let expression = $('#display').val();
+        // Передаем строку в функцию для обработки
+        const result = parseExpression(expression);
+        // Выводим результат в консоль
+        console.log(result)
+        // Выводим результат на дисплей
+        $('#display').val(result);
     } catch (error) {
+        // Выводим ошибку на дисплей
         $('#display').val(error);
         return;
     }
