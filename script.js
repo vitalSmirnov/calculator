@@ -41,6 +41,19 @@ function calculate() {
 
 
 function parseExpression(expression) {
+    // создаем стек для чисел и стек для операторов
+    let stack = []
+    let operators = []
+
+    // функция для подготовки к вычислению конкретной операции. 
+    // Находится внутри, чтобы создать замыкание на переменные stack и operators
+    function calculateOperation() {
+        // удалив и вернем последние два числа и оператор из стеков, воспользовавшись функцией .pop()
+        let right = stack.pop();
+        let left = stack.pop();
+        let result = calc(left, right, operators.pop());
+        stack.push(result);
+    }
     // разбиваем строку на токены, используя регулярное выражение, которое собирает все числа и операторы в массив. Пример : '5 + 5' => ['5', '+', '5']
     let tokens = expression.match(/(-?\d+\.?\d*)|([\+\-\*\/])/g);
     // если токенов нет, то выражение некорректное
