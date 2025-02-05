@@ -1,3 +1,9 @@
+// для удобства добавим объект с ошибками, чтобы не приходилось в каждом месте редактировать текст ошибки
+const ERRORS = {
+    ['DIVISION_BY_ZERO']: 'Деление на ноль',
+    ['INVALID_EXPRESSION']: 'Некорректное выражение'
+};
+
 // чтобы не загружать каждый раз для проверки приоритетов операторов, создадим объект с приоритетами, для доступа к ним по ключу
 const PRIORITY = {
     ['^']: 3,
@@ -18,7 +24,7 @@ function appendValue(value) {
     const lastChar = display.slice(-1);
 
     // Строка не может начинаться с знака умножения, деления, плюса или нескольких нулей
-    if ((display == '0' || display == 'Деление на ноль' || display == 'Некорректное выражение') && value != '.' && value != '+' && value != '*' && value != '/' && value != '0') {
+    if ((display == '0' || display == ERRORS['DIVISION_BY_ZERO'] || display == ERRORS['INVALID_EXPRESSION']) && value != '.' && value != '+' && value != '*' && value != '/' && value != '0') {
         $('#display').val(value);
     }
     else {
@@ -74,7 +80,7 @@ function parseExpression(expression) {
     // разбиваем строку на токены, используя регулярное выражение, которое собирает все числа и операторы в массив. Пример : '5 + 5' => ['5', '+', '5']
     let tokens = expression.match(/(-?\d+\.?\d*)|([\+\-\*\/])/g);
     // если токенов нет, то выражение некорректное
-    if (!tokens) throw 'Некорректное выражение';
+    if (!tokens) throw ERRORS['INVALID_EXPRESSION'];
 
 
     tokens.forEach(token => {
@@ -106,7 +112,7 @@ function calc(left, right, op) {
         case '*':
             return left * right;
         case '/':
-            if (right === 0) throw 'Деление на ноль';
+            if (right === 0) throw ERRORS['DIVISION_BY_ZERO'];
             return left / right;
     }
 }
